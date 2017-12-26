@@ -1,18 +1,74 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {  Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+//Custom Imports
+import Main from './Components/Shared/Main';
+
+//Firebase configuration
+import { auth, storageKey }  from './Config/Config';
+
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      isAuthenticated: auth.currentUser !== undefined ? true : false,
+      user:{
+        displayName:""
+      }
+    };
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        window.localStorage.setItem(storageKey, user.uid);
+        this.setState({
+              user:user, 
+              isAuthenticated: true
+            });
+      } else {
+        window.localStorage.removeItem(storageKey);
+        this.setState({
+          isAuthenticated:false,
+          user:{
+            displayName:""
+          }
+        });
+      }
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+          <Navbar inverse collapseOnSelect>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <a href="/">
+                  <img src={logo} className="App-logo" alt="logo" />
+                  MovieSpoilers
+                </a>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>\
+              <Nav pullRight>
+                <NavItem eventKey={1} href="#">
+
+                </NavItem>
+                <NavDropdown eventKey={3} title={this.state.user.displayName} id="basic-nav-dropdown">
+                  <MenuItem eventKey={3.1}>Profile</MenuItem>
+                  <MenuItem eventKey={3.2}>Another action</MenuItem>
+                  <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey={3.3}>Log out</MenuItem>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <Main isAuthenticated={this.state.isAuthenticated} />
       </div>
     );
   }
