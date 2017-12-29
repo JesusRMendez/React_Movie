@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/src/Config/config.js
+
 
 # testing
 /coverage
