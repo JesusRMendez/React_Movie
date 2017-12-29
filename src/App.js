@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {  Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 //Custom Imports
-import Main from './Components/Shared/Main';
+import Main from './Containers/Main';
 
 //Firebase configuration
 import { auth, storageKey }  from './Config/Config';
@@ -68,7 +68,14 @@ class App extends Component {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-          <Main isAuthenticated={this.state.isAuthenticated} />
+          <div className="container">
+            <div className="col-md-2">
+                Navigation Left (Rankings, etc..)
+            </div>
+            <div className="col-md-10">
+              <Main isAuthenticated={this.state.isAuthenticated} />
+            </div>
+          </div>
       </div>
     );
   }

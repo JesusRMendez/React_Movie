@@ -19,7 +19,7 @@ class MovieSearch extends Component {
      
     constructor(props){
         super(props);
-        this.searchkit = new SearchkitManager("http://localhost:9200/movies/movie/",  {
+        this.searchkit = new SearchkitManager(props.elasticUrl,  {
             basicAuth:"elastic:bDz!#$7tb&btBcooHLT-"
           });
     }

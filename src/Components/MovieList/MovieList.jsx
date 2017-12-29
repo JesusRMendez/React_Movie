@@ -15,7 +15,7 @@ class MovieList extends Component {
             <div>
                 <div>
                     {this.state.movies.map(movie=> 
-                        <Movie title={movie._source.title} cover={movie._source.cover} userRating={movie._source.userRating} favorite={movie._source.title} key={movie._id} />
+                        <Movie content={movie._source} key={movie._id} id={movie._id} />
                     )}
                 </div>
             </div>

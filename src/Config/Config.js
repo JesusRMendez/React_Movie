@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import '@firebase/firestore';
 
 const FIREBASE_CONFIG = {
     apiKey: "AIzaSyALAtiYrKKzWuvNzZ-9KY7Evy-wyhNZ83A",
@@ -11,7 +12,7 @@ const FIREBASE_CONFIG = {
 
 export const firebaseApp = firebase.initializeApp(FIREBASE_CONFIG);
 
-export const db = firebaseApp.database(); //the real-time database
+export const db = firebaseApp.firestore(); //the real-time database
 export const auth = firebaseApp.auth(); //the firebase auth namespace
 
 export const storageKey = 'AUTH_USER';
@@ -23,4 +24,8 @@ export const isAuthenticated = () => {
 export const getUser = () =>{
   return auth.currentUser;
 }
+
 export const provider = new firebase.auth.GoogleAuthProvider();
+
+export const ELASTIC_API = "localhost:9200";
+export const basicApi = "elastic:bDz!#$7tb&btBcooHLT-";
