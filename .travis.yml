@@ -1,0 +1,20 @@
+
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
+install:
+  - npm install
+before_script:
+  - export CI=false
+  
+deploy:
+  skip_cleanup: true
+  provider: script
+  #script: npm run publish:webapp
+  on:
+    branch: master
